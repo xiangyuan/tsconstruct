@@ -21,7 +21,7 @@ uint8_t * packet_header_parse(uint8_t *packet_data, ts_header *p_header) {
 		// ts_LOGf("*** TS packet do not start with sync byte 0x47 but with 0x%02x\n", ts_packet[0]);
 //		goto return_error;
 	}
-
+	p_header->sync_byte = packet_data[0];
 	p_header->transport_error_indicator = (packet_data[1] & ~0x7f) >> 7; // x1111111
 	p_header->payload_unit_start_indicator = (packet_data[1] & ~0xbf) >> 6;
 	p_header->transport_priority = (packet_data[1] & ~0xdf) >> 5; // 11x11111
@@ -77,7 +77,8 @@ void packet_header_generate(uint8_t *packet_data, ts_header *p_header) {
  * dump the ts header infomations
  */
 void packet_header_dump(ts_header *ts_header) {
-	printf("*** tei:%d pusi:%d prio:%d pid:%04x (%d) scramble:%d adapt:%d payload:%d adapt_len:%d adapt_flags:%d\n",
+	printf("*** synctype %d transport_error_indicator:%d payload_unit_start_indicator:%d transport_priority:%d pid:%04x (%d) transport_scrambling_control:%d adaptation_feild_control:%d payload_unit_start_indicator:%d adaptation_field_length:%d adapt_flags:%d\n",
+			ts_header->sync_byte,
 			ts_header->transport_error_indicator,
 			ts_header->payload_unit_start_indicator,
 			ts_header->transport_priority,
