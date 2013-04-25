@@ -9,6 +9,19 @@
 #define TSCOMMON_H_
 #include <stdint.h>
 
+typedef struct {
+	uint8_t adaptation_field_length;
+	uint8_t discontinuity_indicator;
+	uint8_t random_access_indicator;// 1 bslbf
+	uint8_t elementary_stream_priority_indicator;// 1 bslbf
+	uint8_t PCR_flag;// 1 bslbf
+	uint8_t OPCR_flag;// 1 bslbf
+	uint8_t splicing_point_flag;// 1 bslbf
+	uint8_t transport_private_data_flag;// 1 bslbf
+	uint8_t adaptation_field_extension_flag;
+
+}ts_adaptation_field;
+
 /*every packat*/
 /*The TS header*/
 typedef struct {
@@ -20,7 +33,10 @@ typedef struct {
 	uint8_t transport_scrambling_control;
 	uint8_t adaptation_feild_control;
 	uint8_t continuity_counter;
+	ts_adaptation_field adaptation;
 } ts_header;
+
+
 
 /**
  * PMT
