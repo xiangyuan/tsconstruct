@@ -79,7 +79,15 @@ void packet_header_generate(uint8_t *packet_data, ts_header *p_header) {
  * dump the ts header infomations
  */
 void packet_header_dump(ts_header *ts_header) {
-	printf("*** synctype %d transport_error_indicator:%d payload_unit_start_indicator:%d transport_priority:%d pid:%04x (%d) transport_scrambling_control:%d adaptation_feild_control:%d payload_unit_start_indicator:%d adaptation_field_length:%d adapt_flags:%d\n",
+	printf("[INFO]:synctype %d\n"
+			"[INFO]:transport_error_indicator:%d \n"
+			"[INFO]:payload_unit_start_indicator:%d\n"
+			"[INFO]:transport_priority:%d\n"
+			"[INFO]:pid:%04x (%d) \n"
+			"[INFO]:transport_scrambling_control:%d \n"
+			"[INFO]:adaptation_feild_control:%d \n"
+			"[INFO]:payload_unit_start_indicator:%d \n"
+			"[INFO]:adaptation_field_length:%d adapt_flags:%d\n\n",
 			ts_header->sync_byte,
 			ts_header->transport_error_indicator,
 			ts_header->payload_unit_start_indicator,

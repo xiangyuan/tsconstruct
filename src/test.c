@@ -36,7 +36,6 @@ int main(int argc, char **argv) {
 	while ((ret = read(fd, packet, 188)) == 188) {
 		ts_header header;
 		uint16_t pid = packet_get_pid(packet);
-		printf("the pid %0x \n", pid);
 		uint8_t * remain_data = packet_header_parse(packet, &header);
 		packet_header_dump(&header);
 
