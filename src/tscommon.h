@@ -34,6 +34,7 @@ typedef struct {
 	uint8_t adaptation_feild_control;
 	uint8_t continuity_counter;
 	ts_adaptation_field adaptation;
+	uint8_t remain_data_offset;//the remain data offset
 } ts_header;
 
 

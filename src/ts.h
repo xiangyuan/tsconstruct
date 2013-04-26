@@ -13,6 +13,8 @@ uint16_t packet_get_pid(uint8_t* packet_data);
 /***
  * parse the ts packet header
  * and the send the ts_header parameter
+ * @return if have pes data the split the original data offset the ts header
+ * 		    if have pes data or return the new remain data
  */
 uint8_t * packet_header_parse(uint8_t *packet_data,
 		 ts_header *p_header);

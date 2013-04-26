@@ -35,6 +35,7 @@ uint8_t * packet_header_parse(uint8_t *packet_data, ts_header *p_header) {
 	if (!p_header->adaptation_feild_control) {
 		p_header->adaptation.adaptation_field_length = 0;
 		p_header->adaptation.adaptation_field_extension_flag = 0;
+		p_header->remain_data_offset = 4;
 //		ts_header->payload_offset = 4;
 	} else {
 		p_header->adaptation.adaptation_field_length = packet_data[4];
@@ -43,6 +44,7 @@ uint8_t * packet_header_parse(uint8_t *packet_data, ts_header *p_header) {
 			p_header->adaptation.adaptation_field_extension_flag = packet_data[5];
 			//ts_header->adapt_flags = ts_packet[5];
 		}
+		p_header->remain_data_offset = 5 + p_header->adaptation.adaptation_field_length;
 //		ts_header->payload_offset = 5 + ts_header->adapt_len; // 2 bytes see above
 	}
 
@@ -65,7 +67,7 @@ uint8_t * packet_header_parse(uint8_t *packet_data, ts_header *p_header) {
 //	return ts_packet + ts_header->payload_offset;
 //
 //	return_error: memset(ts_header, 0, sizeof(struct ts_header));
-	return 0;
+	return packet_data + p_header->remain_data_offset;
 }
 /***
  * generate the header
